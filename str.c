@@ -58,15 +58,23 @@ char * myStrchar(char * location, char wanted) {
 * Concatenates source to dest, source unaffected
 */
 char * myStrncat( char *dest, char *source ,int n){
-  int high=strlen(dest);
-  int i=0;
-  for(;i<n;i++){
-    dest[high+i]=source[i];
-    printf("%s\n",dest);
+  char *arr=dest;
+  while(*dest!= '\0'){
+    dest++;
   }
-  return dest;
+  int i=0;
+  while(*source !='\0' && i<n){
+    *dest=*source;
+    dest++;
+    source++;
+    i++;
+  }
+  *dest='\0';
+  return arr;
 }
+//char * myStrstr(char *s1, char *s2 ){
 
+//}
 
 int main() {
   //need better test cases
@@ -80,6 +88,6 @@ int main() {
           ert, 's', 's', myStrchar(ert, 's'), strchr(ert, 's'));
   char animal[]="cat";
   char verb[]="fishing";
-  printf("cat: %s is appended to %s, to %d letters, resulting in %s\n",verb,"cat",4, strncat(animal,verb,4));
+  printf("cat: %s is appended to %s, to %d letters, resulting in %s\n",verb,"cat",4, myStrncat(animal,verb,4));
   return 0;
 }
