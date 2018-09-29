@@ -39,6 +39,17 @@ int myStrcmp(char *s1, char *s2) {
   }
 }
 
+char * myStrchar(char * location, char wanted) {
+  while (*location++) {
+    if (*location == wanted) {
+      return location;
+    }
+  }
+  return NULL;
+}
+
+
+
 int main() {
   char len[] = "Hello";
   char str[] = "Hello";
@@ -47,5 +58,8 @@ int main() {
   // printf("cpy %p, %s\n", myStrcpy(len, str), len);
   printf("Compare: %s to %s,  %i\n        %s to %s, %i\n",
 	 len, str, myStrcmp(len, str), str, ert, myStrcmp(str, ert));
+   printf("Str char: where does %s have %c?\n%c is at: %p\n actual location: %p\n",
+          ert, 's', 's', myStrchar(ert, 's'), strchr(ert, 's'));
+  
   return 0;
 }
