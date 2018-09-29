@@ -72,9 +72,17 @@ char * myStrncat( char *dest, char *source ,int n){
   *dest='\0';
   return arr;
 }
-//char * myStrstr(char *s1, char *s2 ){
+char * myStrstr(char * s1, char * s2 ){
+  char * first_occurence = myStrchar(s1, *s2);
+  int i =0;
+  for (; s2[i]; i++) {
+    if (first_occurence[i] != s2[i]) {
+      return myStrstr(first_occurence + 1, s2);
+    }
+  }
+  return first_occurence;
 
-//}
+}
 
 int main() {
   //need better test cases
@@ -84,10 +92,13 @@ int main() {
   printf("length is %i\n", myStrlen(len) );
   printf("Compare: %s to %s,  %i\n", len, str, myStrcmp(len, str));
   printf("cpy:at %p, len is now %s\n", myStrcpy(len, ert), len );
-  printf("Str char: where does %s have %c?\n%c is at: %p\n actual location: %p\n\n",
+  printf("Str char: where does %s have %c?\n%c is at: %p\n actual location: %p\n",
           ert, 's', 's', myStrchar(ert, 's'), strchr(ert, 's'));
   char animal[]="cat";
   char verb[]="fishing";
   printf("cat: %s is appended to %s, to %d letters, resulting in %s\n",verb,"cat",4, myStrncat(animal,verb,4));
+  char first[] = "cat";
+  char second[] = "HelloCatit\'sme, a cat";
+  printf("Does string %s exist in %s ? Yes, at %p          actual is at %p\n", first, second, myStrstr(second, first), strstr(second, first));
   return 0;
 }
