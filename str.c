@@ -10,7 +10,7 @@ int myStrlen(char * len) {
     runSum++; 
   }
   return runSum;
-} //end myStrlen(char *)
+}
 
 /*
 * Overwrites dest with source, source unaffected
@@ -20,7 +20,7 @@ char * myStrcpy(char * dest, char * source) {
     *dest++ = *source++; //change dest val to source val then increment both
   }
   return dest;
-} //end myStrcpy(char *, char *)
+}
 
 /*
 * Compares s1 and s2, both unaffected
@@ -40,7 +40,7 @@ int myStrcmp(char *s1, char *s2) {
     s1++;
     s2++;
   }
-} //end myStrcmp(char *, char*)
+}
 
 /*
 * Searches location for wanted, both unaffected
@@ -53,8 +53,7 @@ char * myStrchar(char * location, char wanted) {
     location++; //curr val of location isn't wanted, move along
   }
   return NULL; //wanted not in location
-} //end myStrchar(char *, char *)
-
+}
 /*
 * Concatenates source to dest, source unaffected
 */
@@ -72,12 +71,30 @@ char * myStrncat( char *dest, char *source ,int n){
   }
   *dest='\0';
   return arr;
-} //end myStrcat(char *, char *, int)
-
+}
 /*
-* Searches str_to_search for wanted_str, both unaffected. Returns pointer
+* Checks if s2 exists within s1, s2 unaffected
 */
-char * myStrstr(char * str_to_search, char * wanted_str ){
+char * myStrstr(char *s1, char *s2 ){
+  if(strlen(s1)<strlen(s2)){//s2 cannot exist in s1 if s2 is larger
+    return NULL;
+  }
+
+  while(*s1){//checks location of s1 
+        char *pos1=s1;//holds value of s1 before changes 
+        char *pos2=s2;//holds value of s2 before changes
+        while(*s1 && *pos2 && *s1== *pos2){//s1 and pos2 string must have not terminated and they must match 
+          *s1++;//moves value of s1 
+          *pos2++;//moves value of pos2
+        }
+        if(!*pos2){//if string has been matched
+            return pos1;//returns beginning of string at s1(pos1)
+          }
+        s1=pos1+1;//moves value of original string to start from
+  }
+  return NULL;//s2 not in s1 
+}
+/*char * myStrstr(char * str_to_search, char * wanted_str ){
   char * first_occurence = myStrchar(str_to_search, *wanted_str); //first place that wanted_str shows up, lets us forget about prev stuff
   int i =0; //avoids changing first_occurence address
   for (; wanted_str[i]; i++) { //while (wanted_str[i] != '\0') { ... i++ }
@@ -87,7 +104,7 @@ char * myStrstr(char * str_to_search, char * wanted_str ){
   }
   return first_occurence; //location of first_occurence never changes from the location of the first occurence of the wanted_str, so first_occurence can be returned
 
-} //end myStrstr(char *, char *)
+} */
 
 int main() {
   //need better test cases
@@ -97,12 +114,14 @@ int main() {
   printf("length is %i\n", myStrlen(len) );
   printf("Compare: %s to %s,  %i\n", len, str, myStrcmp(len, str));
   printf("cpy:at %p, len is now %s\n", myStrcpy(len, ert), len );
-  printf("Str char: where does %s have %c?\n%c is at: %p\n actual location: %p\n",
+  printf("Str char: where does %s have %c?\n%c is at: %p\n actual location: %p\n\n",
           ert, 's', 's', myStrchar(ert, 's'), strchr(ert, 's'));
   char animal[]="cat";
   char verb[]="fishing";
+  char place[]="Hell";
   printf("cat: %s is appended to %s, to %d letters, resulting in %s\n",verb,"cat",4, myStrncat(animal,verb,4));
-  char first[] = "cat";
+  printf("str str: %s is found in %s, location %p but real location %p", place,str, myStrstr(str,place), strstr(str,place));
+    char first[] = "cat";
   char second[] = "HelloCatit\'sme, a cat";
   printf("Does string %s exist in %s ? Yes, at %p          actual is at %p\n", first, second, myStrstr(second, first), strstr(second, first));
   return 0;
