@@ -54,7 +54,18 @@ char * myStrchar(char * location, char wanted) {
   }
   return NULL; //wanted not in location
 }
-
+/*
+* Concatenates source to dest, source unaffected
+*/
+char * myStrncat( char *dest, char *source ,int n){
+  int high=strlen(dest);
+  int i=0;
+  for(;i<n;i++){
+    dest[high+i]=source[i];
+    printf("%s\n",dest);
+  }
+  return dest;
+}
 
 
 int main() {
@@ -67,6 +78,8 @@ int main() {
   printf("cpy:at %p, len is now %s\n", myStrcpy(len, ert), len );
   printf("Str char: where does %s have %c?\n%c is at: %p\n actual location: %p\n\n",
           ert, 's', 's', myStrchar(ert, 's'), strchr(ert, 's'));
-  
+  char animal[]="cat";
+  char verb[]="fishing";
+  printf("cat: %s is appended to %s, to %d letters, resulting in %s\n",verb,"cat",4, strncat(animal,verb,4));
   return 0;
 }
