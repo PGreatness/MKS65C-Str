@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdio.h>
+#include "str.h"
 
 /*
 * Returns length, len unaffected
@@ -66,10 +67,18 @@ char * myStrchar(char * location, char wanted) {
   }
   return NULL; //wanted not in location
 }
+
+/*
+* Concatenates entire source to dest, source unaffected
+*/
+char * myStrcat(char * dest, char * source) {
+  int length = myStrlen(source);
+  return myStrncat(dest, source, length);
+}
+
 /*
 * Concatenates source(up to n) to dest, source unaffected
 */
-
 char * myStrncat( char *dest, char *source ,int n){
   char *arr=dest;
   while(*dest!= '\0'){
@@ -84,14 +93,6 @@ char * myStrncat( char *dest, char *source ,int n){
   }
   *dest='\0';
   return arr;
-}
-
-/*
-* Concatenates entire source to dest, source unaffected
-*/
-char * myStrcat(char * dest, char * source) {
-  int length = myStrlen(source);
-  return myStrncat(dest, source, length);
 }
 
 /*
