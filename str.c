@@ -10,7 +10,7 @@ int myStrlen(char * len) {
     runSum++; 
   }
   return runSum;
-}
+} //end myStrlen(char *)
 
 /*
 * Overwrites dest with source, source unaffected
@@ -20,7 +20,7 @@ char * myStrcpy(char * dest, char * source) {
     *dest++ = *source++; //change dest val to source val then increment both
   }
   return dest;
-}
+} //end myStrcpy(char *, char *)
 
 /*
 * Compares s1 and s2, both unaffected
@@ -40,7 +40,7 @@ int myStrcmp(char *s1, char *s2) {
     s1++;
     s2++;
   }
-}
+} //end myStrcmp(char *, char*)
 
 /*
 * Searches location for wanted, both unaffected
@@ -53,7 +53,8 @@ char * myStrchar(char * location, char wanted) {
     location++; //curr val of location isn't wanted, move along
   }
   return NULL; //wanted not in location
-}
+} //end myStrchar(char *, char *)
+
 /*
 * Concatenates source to dest, source unaffected
 */
@@ -71,18 +72,22 @@ char * myStrncat( char *dest, char *source ,int n){
   }
   *dest='\0';
   return arr;
-}
-char * myStrstr(char * s1, char * s2 ){
-  char * first_occurence = myStrchar(s1, *s2);
-  int i =0;
-  for (; s2[i]; i++) {
-    if (first_occurence[i] != s2[i]) {
-      return myStrstr(first_occurence + 1, s2);
+} //end myStrcat(char *, char *, int)
+
+/*
+* Searches str_to_search for wanted_str, both unaffected. Returns pointer
+*/
+char * myStrstr(char * str_to_search, char * wanted_str ){
+  char * first_occurence = myStrchar(str_to_search, *wanted_str); //first place that wanted_str shows up, lets us forget about prev stuff
+  int i =0; //avoids changing first_occurence address
+  for (; wanted_str[i]; i++) { //while (wanted_str[i] != '\0') { ... i++ }
+    if (first_occurence[i] != wanted_str[i]) {  //there is a mismatch, first_occurence doesn't have the string
+      return myStrstr(first_occurence + 1, wanted_str); //starts from the second occurence of the first character in wanted_str
     }
   }
-  return first_occurence;
+  return first_occurence; //location of first_occurence never changes from the location of the first occurence of the wanted_str, so first_occurence can be returned
 
-}
+} //end myStrstr(char *, char *)
 
 int main() {
   //need better test cases
