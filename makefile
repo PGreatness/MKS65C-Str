@@ -1,5 +1,5 @@
 all:str.o
-    gcc str.o
-str.o: str.c str.h
-	gcc --c str.c
-
+	gcc str.o
+	./a.out
+str.o: str.c
+	gcc -c str.c
