@@ -23,6 +23,18 @@ char * myStrcpy(char * dest, char * source) {
 }
 
 /*
+* Overwrites dest with source up until limit, source unaffected
+*/
+char * myStrncpy(char * dest, char * source, int limit) {
+  int i =0;
+  while(*dest && i < limit) {
+    *dest++ = *source++;
+    i++;
+  }
+  return dest;
+}
+
+/*
 * Compares s1 and s2, both unaffected
 */
 int myStrcmp(char *s1, char *s2) {
@@ -55,8 +67,9 @@ char * myStrchar(char * location, char wanted) {
   return NULL; //wanted not in location
 }
 /*
-* Concatenates source to dest, source unaffected
+* Concatenates source(up to n) to dest, source unaffected
 */
+
 char * myStrncat( char *dest, char *source ,int n){
   char *arr=dest;
   while(*dest!= '\0'){
@@ -72,6 +85,15 @@ char * myStrncat( char *dest, char *source ,int n){
   *dest='\0';
   return arr;
 }
+
+/*
+* Concatenates entire source to dest, source unaffected
+*/
+char * myStrcat(char * dest, char * source) {
+  int length = myStrlen(source);
+  return myStrncat(dest, source, length);
+}
+
 /*
 * Checks if s2 exists within s1, s2 unaffected
 */
