@@ -17,22 +17,24 @@ int myStrlen(char * len) {
 * Overwrites dest with source, source unaffected
 */
 char * myStrcpy(char * dest, char * source) {
+  char * placeholder = dest;
   while(*dest) { //check current val of dest
     *dest++ = *source++; //change dest val to source val then increment both
   }
-  return dest;
+  return placeholder;
 }
 
 /*
 * Overwrites dest with source up until limit, source unaffected
 */
 char * myStrncpy(char * dest, char * source, int limit) {
+  char * placeholder = dest;
   int i =0;
   while(*dest && i < limit) {
     *dest++ = *source++;
     i++;
   }
-  return dest;
+  return placeholder;
 }
 
 /*
@@ -153,8 +155,8 @@ int main() {
   char s22[] = "A quick brown fox laid a pretty nice trap.";
 
   printf("----------------------------String Length--------------------\nString to be measured: \"%s\"\n[Mine]: %i\n[Actual]: %li\n", s1, myStrlen(s1), strlen(s1));
-  printf("---------------------------String copy-----------------------\nString to be copied: String \"%s\" copied over to string \"%s\"\n[Mine]: \"%s\"\n[Actual]: \"%s\"\n", s3, s1, myStrcpy(s3, s1), strcpy(s4, s2));
-  printf("---------------------------String copy (numbered)------------\nString \"%s\" copied over to \"%s\" up until the letter at index %i of \"%s\"\n[Mine]: \"%s\"\n[Actual]: \"%s\"\n", s5, s6, 4, s5, myStrncpy(s6, s5, 4), strncpy(s7, s8, 4));
+  printf("---------------------------String copy-----------------------\nString to be copied: String \"%s\" copied over to string \"%s\"\n[Mine]: \"%s\"\n[Actual]: \"%s\"\n", "Person", "Hello", myStrcpy(s3, s1), strcpy(s4, s2));
+  printf("---------------------------String copy (numbered)------------\nString \"%s\" copied over to \"%s\" up until the letter at index %i of \"%s\"\n[Mine]: \"%s\"\n[Actual]: \"%s\"\n", "Concatenation", "Puppy", 4, "Concatenation", myStrncpy(s5, s6, 4), strncpy(s7, s8, 4));
   printf("--------------------------String Comparisons-----------------\nStrings to be compared: \"%s\" and \"%s\", then \"%s\" and \"%s\"\nIf \"%s\" is greater, returns a positive number, else returns a negative number.\nEqual returns a zero(0).\n[Mine]: %i\n[Actual]: %i\nIf \"%s\" is greater, returns a positive number, else returns a negative number.\nEqual returns a zero(0).\n[Mine]: %i\n[Actual]: %i\n", s9, s10, s5, s7, s9, myStrcmp(s9, s10), strcmp(s9, s10), s5, myStrcmp(s5, s7), strcmp(s5, s7));
   printf("---------------------String Search (single character)-----------------\nString to search: \"%s\". We shall look for this character: \"%s\"\n[Mine]: Is this the character? \"%s\"\nWe found it at %p\n[Actual]: This is the character: %s.\nIt was found at %p\n\nLet's go on a wild goose chase with \"%s\" and tell them to look for \"%s\"  :3\n[Mine]: What a joker. We found this \"%s\" at \"%p\". Nice going. >:(\n[Actual]: This search system is either looking for what doesn\'t exist or \nthe person is an idiot. We found \"%s\" at \"%p\"\n", s11, "d", myStrchar(s11, *"d"), myStrchar(s11, *"d"), strchr(s11, *"d"),strchr(s11, *"d"), s12, "!", myStrchar(s12, *"!"), myStrchar(s12, *"!"), strchr(s12, *"!"), strchr(s12, *"!"));
   printf("-------------------String Concatenation----------------------------\nStrings to join together: \"%s\" and \"%s\", with \"%s\" leading.\n[Mine]: %s\n[Actual]: %s\n", "The quick brown fox", " made friends with the nice man with ice cream.", "The quick brown fox", myStrcat(s13, s14), strcat(s15, s16));
